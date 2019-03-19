@@ -8,15 +8,6 @@ else
     CMAKE=cmake
 fi
 
-CORES=$(getconf _NPROCESSORS_ONLN 2>/dev/null || sysctl -n hw.ncpu)
-
-if [ "x$CORES" = "x" ]; then
-    PAR=""
-else
-    PAR="-- -j $CORES"
-fi
-
-${CMAKE} --build . "$@" $PAR || exit 1
-
+${CMAKE} --build . "$@" || exit 1
 
 echo done.
