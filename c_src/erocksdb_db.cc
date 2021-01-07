@@ -635,6 +635,12 @@ ERL_NIF_TERM parse_cf_option(ErlNifEnv* env, ERL_NIF_TERM item, rocksdb::ColumnF
                 }
             }
         }
+        else if (option[0] == erocksdb::ATOM_MAX_TABLE_FILES_SIZE)
+        {
+            ErlNifUInt64 max_table_files_size;
+            if (enif_get_uint64(env, option[1], &max_table_files_size))
+                opts.compaction_options_fifo.max_table_files_size = max_table_files_size;
+        }
         else if (option[0] == erocksdb::ATOM_COMPARATOR)
         {
             if (option[1] == erocksdb::ATOM_BYTEWISE_COMPARATOR)
